@@ -4,7 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gilles Pegguy Portfolio</title>
-<meta name="description" content="Portfolio de Gilles Pegguy, alternant ingénieur Systèmes, Réseaux et Cybersécurité (ESIEA).">
+<meta name="description" content="Gilles Pegguy, alternant ingénieur Systèmes, Réseaux et Cybersécurité (ESIEA, 3 semaines entreprise / 1 semaine école). Titre RNCP 7 Cybersécurité & Réseaux, CCNA. Projets, parcours et compétences.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Gilles Pegguy : alternant ingénieur Systèmes, Réseaux & Cybersécurité">
+<meta property="og:description" content="Réseau, identités et accès, automatisation : projets réels, expériences en entreprise et compétences. Disponible en alternance jusqu'en août 2029.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231b2a4a'/%3E%3Ctext x='32' y='42' font-family='monospace' font-size='26' font-weight='700' text-anchor='middle' fill='%23fb923c'%3EGP%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Public+Sans:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
@@ -144,7 +148,7 @@ table.skills th { font: 600 .8rem var(--font-mono); text-transform: uppercase; l
 }
 
 /* Certifs */
-.certs { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: .75rem; }
+.certs { display: grid; grid-template-columns: repeat(auto-fit, minmax(10.5rem, 1fr)); gap: .75rem; }
 .cert { border: 1px solid var(--line); border-radius: 10px; padding: 1rem; background: var(--surface); display: grid; gap: .3rem; }
 .cert b { font-family: var(--font-display); font-size: 1.05rem; }
 .state { font-family: var(--font-mono); font-size: .72rem; }
@@ -152,6 +156,37 @@ table.skills th { font: 600 .8rem var(--font-mono); text-transform: uppercase; l
 .state.wip { color: var(--accent); }
 
 footer { padding-top: 2rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .85rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; }
+/* Ajouts v2 : chiffres clés, piliers, récit de parcours, appel à l'action */
+.figures { display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.fig { background: var(--surface); padding: 1.1rem 1.2rem; display: grid; gap: .25rem; min-width: 0; }
+.fig b { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.3rem); line-height: 1; color: var(--ink); font-variant-numeric: tabular-nums; }
+.fig b small { font-size: .55em; color: var(--accent); margin-left: .15rem; }
+.fig span { font-size: .88rem; color: var(--muted); }
+.pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(16.5rem, 1fr)); gap: 1rem; }
+.pillar { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 1.25rem; display: flex; flex-direction: column; gap: .7rem; min-width: 0; }
+.pillar .k { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.pillar h3 { font-size: 1.25rem; }
+.pillar p { color: var(--muted); font-size: .95rem; }
+.pillar .proof { margin-top: auto; border-top: 1px dashed var(--line); padding-top: .7rem; font-size: .88rem; }
+.pillar .proof b { font-family: var(--font-mono); font-size: .72rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); display: block; margin-bottom: .2rem; }
+.story { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 2rem; align-items: start; }
+@media (max-width: 46rem) { .story { grid-template-columns: 1fr; } }
+.story p + p { margin-top: .9rem; }
+.path { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border-left: 2px solid var(--line); }
+.path li { position: relative; padding: 0 0 1.1rem 1.1rem; }
+.path li::before { content: ""; position: absolute; left: -7px; top: .35rem; width: 12px; height: 12px; border-radius: 50%; background: var(--surface); border: 2px solid var(--muted); }
+.path li.now::before { border-color: var(--accent); background: var(--accent); }
+.path .y { font-family: var(--font-mono); font-size: .75rem; color: var(--muted); }
+.path .t { font-weight: 600; }
+.path .d { font-size: .88rem; color: var(--muted); }
+.cta { background: var(--navy); color: #e6ebf3; border-radius: 16px; padding: clamp(1.5rem, 4vw, 2.5rem); display: grid; gap: 1.2rem; }
+.cta h2 { color: #fff; font-size: clamp(1.6rem, 4vw, 2.2rem); }
+.cta p { color: #b9c4d8; max-width: 38rem; }
+.cta .btn { background: #fff; color: #14213d; border-color: #fff; text-decoration: none; }
+.cta .btn.ghost { background: transparent; color: #fff; border-color: #6b7a99; }
+.cta .mail { color: #fff; }
+.cta .meta { color: #b9c4d8; }
+a.btn { display: inline-block; text-decoration: none; }
 </style>
 </head>
 <body>
@@ -159,10 +194,10 @@ footer { padding-top: 2rem; border-top: 1px solid var(--line); color: var(--mute
 <nav aria-label="Sections">
   <div class="wrap">
     <a class="brand" href="#top">gilles.pegguy</a>
+    <a class="l" href="#apport">Ce que j'apporte</a>
     <a class="l" href="#projets">Projets</a>
     <a class="l" href="#parcours">Parcours</a>
     <a class="l" href="#competences">Compétences</a>
-    <a class="l" href="#certifications">Certifications</a>
     <a class="l" href="#contact">Contact</a>
   </div>
 </nav>
@@ -171,26 +206,79 @@ footer { padding-top: 2rem; border-top: 1px solid var(--line); color: var(--mute
   <header class="hero">
     <p class="term"><b>gilles@portfolio:~$</b> whoami</p>
     <h1>Gilles Pegguy</h1>
-    <p class="role">Alternant ingénieur Systèmes, Réseaux &amp; Cybersécurité à l'ESIEA, titulaire d'un Titre RNCP niveau 7 en Cybersécurité &amp; Réseaux et certifié CCNA.</p>
-    <p class="pitch">J'ai des bases solides en réseau, en administration Microsoft et en sécurité des accès. J'ai repris un cycle ingénieur pour me spécialiser et relier la technique à la conformité (NIS 2, ISO 27001, EBIOS RM). Ce site montre ce que j'ai réellement construit.</p>
+    <p class="role">Alternant ingénieur Systèmes, Réseaux &amp; Cybersécurité à l'ESIEA. Titulaire d'un Titre RNCP niveau 7 en Cybersécurité &amp; Réseaux et certifié CCNA.</p>
+    <p class="pitch">J'ai configuré des équipements réseau en production, sécurisé des comptes à privilèges et automatisé des déploiements. Je cherche maintenant une alternance où relier ces bases techniques à la sécurité des accès et à la conformité (NIS 2, ISO 27001, EBIOS RM).</p>
     <div class="status">
       <span class="pill"><span class="dot"></span>Disponible en alternance</span>
-      <span class="pill">Rythme 3 semaines entreprise / 1 semaine école</span>
+      <span class="pill">3 semaines entreprise / 1 semaine école</span>
       <span class="pill">Mobilité France entière</span>
       <span class="pill">Jusqu'en août 2029</span>
     </div>
     <div class="contact">
-      <a class="btn" href="#projets" style="text-decoration:none">Voir les projets</a>
-      <a class="btn ghost" href="CV_Gilles_Pegguy.pdf" style="text-decoration:none">Télécharger mon CV</a>
-      <button class="btn ghost" type="button" id="copy-mail-top">Copier mon e-mail</button>
+      <a class="btn" href="CV_Gilles_Pegguy.pdf">Télécharger mon CV</a>
+      <a class="btn ghost" href="#contact">Me contacter</a>
     </div>
   </header>
+
+  <div class="figures" role="list" aria-label="Chiffres clés">
+    <div class="fig" role="listitem"><b>≈50</b><span>équipements réseau mis en production chez NTT Sécurité</span></div>
+    <div class="fig" role="listitem"><b>≈20</b><span>comptes à privilèges intégrés à CyberArk (SSH, RDP, Check Point)</span></div>
+    <div class="fig" role="listitem"><b>150</b><span>utilisateurs sur 3 sites : le SI hybride Helionis, conçu en équipe</span></div>
+    <div class="fig" role="listitem"><b>Bac+5</b><span>Titre RNCP 7 Cybersécurité &amp; Réseaux, puis cycle ingénieur ESIEA</span></div>
+  </div>
 </div>
+
+<section id="apport" style="margin-top:3rem">
+  <div class="wrap">
+    <p class="eyebrow">Ce que j'apporte</p>
+    <h2>Trois domaines où je suis déjà opérationnel</h2>
+    <div class="pillars">
+      <article class="pillar">
+        <p class="k">Réseau &amp; sécurité périmétrique</p>
+        <h3>Configurer, filtrer, diagnostiquer</h3>
+        <p>VLAN, routage OSPF, redondance VRRP, pare-feux Check Point, Fortinet et pfSense, tunnels VPN IPsec. Diagnostic d'incidents avec Wireshark.</p>
+        <p class="proof"><b>Preuve</b>Mise en production d'une cinquantaine d'équipements chez NTT Sécurité ; certification CCNA.</p>
+      </article>
+      <article class="pillar">
+        <p class="k">Identités &amp; accès</p>
+        <h3>Contrôler qui accède à quoi</h3>
+        <p>Comptes à privilèges (PAM), Active Directory, Entra ID, MFA, Conditional Access et principe du moindre privilège, avec la traçabilité des accès.</p>
+        <p class="proof"><b>Preuve</b>Connecteurs CyberArk chez NTT Sécurité ; politique d'accès Entra ID du projet Helionis.</p>
+      </article>
+      <article class="pillar">
+        <p class="k">Automatisation &amp; exploitation</p>
+        <h3>Rendre l'exploitation fiable</h3>
+        <p>Serveurs Linux en conditions opérationnelles, supervision Zabbix, automatisation Ansible, scripts Python, Bash et PowerShell, pipelines Docker, Jenkins et Kubernetes.</p>
+        <p class="proof"><b>Preuve</b>Un an d'alternance DevOps chez Cerfrance Alliance Centre ; scripts d'administration Active Directory (voir projets).</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="pourquoi">
+  <div class="wrap">
+    <p class="eyebrow">Mon parcours</p>
+    <h2>Pourquoi un cycle ingénieur après un Bac+5</h2>
+    <div class="story">
+      <div>
+        <p>J'ai commencé par le terrain : réseaux et télécoms au Cameroun, avec le support aux utilisateurs, la téléphonie IP et un déploiement Wi-Fi haute densité pour la CAN 2022.</p>
+        <p>En France, mon Titre RNCP 7 m'a amené vers la sécurité. Chez NTT Sécurité, j'ai géré des comptes à privilèges ; sur mon projet de fin d'études, j'ai défini la politique d'accès et mené l'analyse de risques d'un SI hybride. Ces expériences m'ont convaincu qu'une infrastructure sûre repose autant sur la technique que sur la conformité et la documentation.</p>
+        <p>J'ai donc choisi de reprendre un cycle ingénieur à l'ESIEA : pour obtenir un diplôme reconnu par la CTI, approfondir cette double compétence et me spécialiser, avec une entreprise qui me confie de vraies responsabilités.</p>
+      </div>
+      <ol class="path" aria-label="Étapes du parcours">
+        <li><span class="y">2020 – 2023</span><div class="t">DUT puis Licence Réseaux &amp; Télécoms</div><div class="d">IUT de Bandjoun, deux stages en entreprise</div></li>
+        <li><span class="y">2024 – 2026</span><div class="t">Titre RNCP 7 Cybersécurité &amp; Réseaux</div><div class="d">IRIS Paris : stage alterné chez NTT Sécurité, puis alternance chez Cerfrance</div></li>
+        <li class="now"><span class="y">2026 – 2029</span><div class="t">Cycle ingénieur en alternance</div><div class="d">ESIEA, 3e année : à la recherche de mon entreprise</div></li>
+      </ol>
+    </div>
+  </div>
+</section>
 
 <section id="projets">
   <div class="wrap">
     <p class="eyebrow">Projets</p>
     <h2>Ce que j'ai construit</h2>
+    <p style="color:var(--muted);max-width:40rem;margin:-1rem 0 1.5rem">Des projets réels, décrits avec ma part exacte du travail. Je peux détailler chacun d'eux en entretien.</p>
 
     <article class="feature">
       <div>
@@ -299,7 +387,7 @@ footer { padding-top: 2rem; border-top: 1px solid var(--line); color: var(--mute
 <section id="parcours">
   <div class="wrap">
     <p class="eyebrow">Parcours</p>
-    <h2>Expériences</h2>
+    <h2>Expériences en entreprise</h2>
     <div class="log">
       <div class="entry">
         <p class="when">sept. 2025 – août 2026</p>
@@ -397,14 +485,21 @@ footer { padding-top: 2rem; border-top: 1px solid var(--line); color: var(--mute
 
 <section id="contact">
   <div class="wrap">
-    <p class="eyebrow">Contact</p>
-    <h2>Vous cherchez un alternant ?</h2>
-    <div class="contact" style="margin-bottom:2.5rem">
-      <span class="mail" id="mail">pegguyhomdim@gmail.com</span>
-      <button class="btn" type="button" id="copy-mail">Copier</button>
-      <span id="copied" class="meta" aria-live="polite"></span>
+    <div class="cta">
+      <p class="eyebrow" style="margin:0">Contact</p>
+      <h2>Vous recrutez un alternant en systèmes, réseaux ou cybersécurité ?</h2>
+      <p>Je suis disponible dès maintenant, au rythme de 3 semaines en entreprise et 1 semaine à l'école, jusqu'en août 2029, partout en France. Écrivez-moi : je réponds rapidement.</p>
+      <div class="contact">
+        <a class="btn" href="mailto:pegguyhomdim@gmail.com?subject=Alternance%20ing%C3%A9nieur%20%3A%20prise%20de%20contact">Écrire un e-mail</a>
+        <a class="btn ghost" href="CV_Gilles_Pegguy.pdf">Télécharger mon CV</a>
+      </div>
+      <div class="contact">
+        <span class="mail" id="mail">pegguyhomdim@gmail.com</span>
+        <button class="btn ghost" type="button" id="copy-mail">Copier l'adresse</button>
+        <span id="copied" class="meta" aria-live="polite"></span>
+      </div>
     </div>
-    <footer>
+    <footer style="margin-top:2.5rem">
       <span>Gilles Pegguy · Créteil, Île-de-France</span>
       <span>Mis à jour en octobre 2026</span>
     </footer>
@@ -415,21 +510,14 @@ footer { padding-top: 2rem; border-top: 1px solid var(--line); color: var(--mute
 (function () {
   var mail = "pegguyhomdim@gmail.com";
   var msg = document.getElementById("copied");
-  function copy() {
-    var done = function () { msg.textContent = "Adresse copiée"; setTimeout(function(){ msg.textContent = ""; }, 2500); };
+  document.getElementById("copy-mail").addEventListener("click", function () {
+    var done = function () { msg.textContent = "Adresse copiée"; setTimeout(function () { msg.textContent = ""; }, 2500); };
     var fallback = function () {
       var r = document.createRange(); r.selectNodeContents(document.getElementById("mail"));
       var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
-      msg.textContent = "Adresse sélectionnée, faites Ctrl+C";
+      msg.textContent = "Adresse sélectionnée : faites Ctrl+C";
     };
-    try {
-      navigator.clipboard.writeText(mail).then(done, fallback);
-    } catch (e) { fallback(); }
-  }
-  document.getElementById("copy-mail").addEventListener("click", copy);
-  document.getElementById("copy-mail-top").addEventListener("click", function () {
-    document.getElementById("contact").scrollIntoView();
-    copy();
+    try { navigator.clipboard.writeText(mail).then(done, fallback); } catch (e) { fallback(); }
   });
 })();
 </script>
