@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gilles Pegguy Portfolio</title>
+<meta name="description" content="Portfolio de Gilles Pegguy, alternant ingénieur Systèmes, Réseaux et Cybersécurité (ESIEA).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Public+Sans:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout : colonne éditoriale unique (max 60rem), en-tête façon terminal, projets en fiches, parcours en journal horodaté. */
+:root {
+  --bg: #f4f6f9;
+  --surface: #ffffff;
+  --ink: #14213d;
+  --muted: #56627a;
+  --line: #d9dfe8;
+  --accent: #c2410c;      /* orange "LED de statut" */
+  --navy: #1b2a4a;
+  --chip: #e8edf4;
+  --ok: #15803d;
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Public Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1526; --surface: #151f35; --ink: #e6ebf3; --muted: #9aa6bd;
+    --line: #26324c; --accent: #fb923c; --navy: #0a1020; --chip: #1e2a44; --ok: #4ade80;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1526; --surface: #151f35; --ink: #e6ebf3; --muted: #9aa6bd;
+  --line: #26324c; --accent: #fb923c; --navy: #0a1020; --chip: #1e2a44; --ok: #4ade80;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-body); font-size: 1rem; line-height: 1.6;
+  padding-inline: 16px; padding-block: 0 4rem;
+}
+.wrap { max-width: 60rem; margin: 0 auto; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; line-height: 1.15; margin: 0; }
+p { margin: 0; }
+
+/* Navigation */
+nav {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+  margin-inline: -16px; padding-inline: 16px;
+}
+nav .wrap { display: flex; gap: 1.25rem; align-items: center; padding-block: .7rem; overflow-x: auto; white-space: nowrap; }
+nav .brand { font-family: var(--font-mono); font-weight: 600; font-size: .85rem; color: var(--ink); text-decoration: none; margin-right: auto; }
+nav a.l { color: var(--muted); text-decoration: none; font-size: .9rem; }
+nav a.l:hover { color: var(--ink); }
+
+/* Hero */
+header.hero { padding-block: 3.5rem 2.5rem; display: grid; gap: 1.5rem; }
+.term {
+  font-family: var(--font-mono); font-size: .85rem; color: var(--muted);
+}
+.term b { color: var(--accent); font-weight: 600; }
+.hero h1 { font-size: clamp(2.6rem, 8vw, 4.6rem); font-weight: 700; letter-spacing: -.02em; }
+.hero .role { font-size: clamp(1.1rem, 2.6vw, 1.35rem); max-width: 40rem; }
+.hero .pitch { color: var(--muted); max-width: 40rem; }
+.status { display: flex; flex-wrap: wrap; gap: .5rem; }
+.pill {
+  display: inline-flex; align-items: center; gap: .45rem;
+  font-family: var(--font-mono); font-size: .78rem;
+  padding: .35rem .7rem; border: 1px solid var(--line); border-radius: 999px; background: var(--surface);
+}
+.pill .dot { width: .5rem; height: .5rem; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ok) 25%, transparent); }
+.contact { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; }
+.btn {
+  font: 600 .9rem var(--font-body); cursor: pointer;
+  padding: .6rem 1rem; border-radius: 8px; border: 1px solid var(--ink);
+  background: var(--ink); color: var(--bg);
+}
+.btn.ghost { background: transparent; color: var(--ink); }
+.mail { font-family: var(--font-mono); font-size: .9rem; user-select: all; }
+
+/* Sections */
+section { padding-block: 3rem; border-top: 1px solid var(--line); }
+.eyebrow { font-family: var(--font-mono); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin-bottom: .5rem; }
+section > .wrap > h2 { font-size: clamp(1.6rem, 4vw, 2.2rem); margin-bottom: 1.75rem; }
+
+/* Projet phare */
+.feature {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+  padding: clamp(1.25rem, 3vw, 2rem); display: grid; gap: 1.5rem;
+}
+.feature h3 { font-size: 1.6rem; }
+.meta { font-family: var(--font-mono); font-size: .8rem; color: var(--muted); }
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1.5rem; }
+.cols > * { min-width: 0; }
+h4 { font: 600 .8rem var(--font-mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0 0 .6rem; }
+ul.clean { margin: 0; padding-left: 1.1rem; display: grid; gap: .45rem; }
+ul.clean li::marker { color: var(--accent); }
+.diagram { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); padding: .75rem; }
+.diagram svg { display: block; min-width: 36rem; width: 100%; height: auto; }
+.tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+.tag { font-family: var(--font-mono); font-size: .74rem; padding: .2rem .55rem; border-radius: 5px; background: var(--chip); color: var(--ink); }
+.lesson { border-left: 3px solid var(--accent); padding-left: 1rem; color: var(--muted); font-style: italic; }
+
+/* Autres projets */
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 1rem; margin-top: 1rem; }
+.card { border: 1px solid var(--line); border-radius: 12px; padding: 1.25rem; display: flex; flex-direction: column; gap: .75rem; background: var(--surface); min-width: 0; }
+.card h3 { font-size: 1.2rem; }
+.card p { color: var(--muted); font-size: .95rem; }
+.card .tags { margin-top: auto; padding-top: .25rem; }
+pre.code {
+  margin: 0; font-family: var(--font-mono); font-size: .75rem; line-height: 1.5;
+  background: var(--navy); color: #dbe4f3; padding: .75rem; border-radius: 8px; overflow-x: auto;
+}
+pre.code .c { color: #8fa3c4; }
+
+/* Parcours */
+.log { display: grid; gap: 0; }
+.entry { display: grid; grid-template-columns: 11rem 1fr; gap: 1.25rem; padding-block: 1.1rem; border-bottom: 1px dashed var(--line); }
+.entry:last-child { border-bottom: 0; }
+.entry .when { font-family: var(--font-mono); font-size: .8rem; color: var(--muted); padding-top: .2rem; font-variant-numeric: tabular-nums; }
+.entry h3 { font-size: 1.1rem; }
+.entry .org { color: var(--muted); font-size: .92rem; margin-bottom: .4rem; }
+.entry ul { margin: 0; padding-left: 1.1rem; display: grid; gap: .3rem; font-size: .95rem; }
+@media (max-width: 40rem) { .entry { grid-template-columns: 1fr; gap: .3rem; } }
+
+/* Compétences */
+table.skills { width: 100%; border-collapse: collapse; }
+table.skills th, table.skills td { text-align: left; vertical-align: top; padding: .75rem .5rem; border-bottom: 1px solid var(--line); }
+table.skills th { font: 600 .8rem var(--font-mono); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); width: 12rem; }
+@media (max-width: 40rem) {
+  table.skills, table.skills tbody, table.skills tr, table.skills th, table.skills td { display: block; width: 100%; }
+  table.skills th { border-bottom: 0; padding-bottom: 0; }
+}
+
+/* Certifs */
+.certs { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: .75rem; }
+.cert { border: 1px solid var(--line); border-radius: 10px; padding: 1rem; background: var(--surface); display: grid; gap: .3rem; }
+.cert b { font-family: var(--font-display); font-size: 1.05rem; }
+.state { font-family: var(--font-mono); font-size: .72rem; }
+.state.done { color: var(--ok); }
+.state.wip { color: var(--accent); }
+
+footer { padding-top: 2rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .85rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; }
+</style>
+</head>
+<body>
+
+<nav aria-label="Sections">
+  <div class="wrap">
+    <a class="brand" href="#top">gilles.pegguy</a>
+    <a class="l" href="#projets">Projets</a>
+    <a class="l" href="#parcours">Parcours</a>
+    <a class="l" href="#competences">Compétences</a>
+    <a class="l" href="#certifications">Certifications</a>
+    <a class="l" href="#contact">Contact</a>
+  </div>
+</nav>
+
+<div class="wrap" id="top">
+  <header class="hero">
+    <p class="term"><b>gilles@portfolio:~$</b> whoami</p>
+    <h1>Gilles Pegguy</h1>
+    <p class="role">Alternant ingénieur Systèmes, Réseaux &amp; Cybersécurité à l'ESIEA, titulaire d'un Titre RNCP niveau 7 en Cybersécurité &amp; Réseaux et certifié CCNA.</p>
+    <p class="pitch">J'ai des bases solides en réseau, en administration Microsoft et en sécurité des accès. J'ai repris un cycle ingénieur pour me spécialiser et relier la technique à la conformité (NIS 2, ISO 27001, EBIOS RM). Ce site montre ce que j'ai réellement construit.</p>
+    <div class="status">
+      <span class="pill"><span class="dot"></span>Disponible en alternance</span>
+      <span class="pill">Rythme 3 semaines entreprise / 1 semaine école</span>
+      <span class="pill">Mobilité France entière</span>
+      <span class="pill">Jusqu'en août 2029</span>
+    </div>
+    <div class="contact">
+      <a class="btn" href="#projets" style="text-decoration:none">Voir les projets</a>
+      <a class="btn ghost" href="CV_Gilles_Pegguy.pdf" style="text-decoration:none">Télécharger mon CV</a>
+      <button class="btn ghost" type="button" id="copy-mail-top">Copier mon e-mail</button>
+    </div>
+  </header>
+</div>
+
+<section id="projets">
+  <div class="wrap">
+    <p class="eyebrow">Projets</p>
+    <h2>Ce que j'ai construit</h2>
+
+    <article class="feature">
+      <div>
+        <p class="meta">Projet de fin d'études · IRIS Paris · Bloc 4, RNCP 35078 · Juin 2026 · Équipe de 4</p>
+        <h3>Helionis : SI hybride sécurisé pour une entreprise de dispositifs médicaux</h3>
+      </div>
+      <p>Helionis est une entreprise fictive de 150 collaborateurs répartis sur 3 sites (siège à Lyon, usine à Clermont-Ferrand, R&amp;D à Grenoble). Notre mission : concevoir et déployer un système d'information hybride, sécurisé et conforme, pour une activité qui manipule des données sensibles.</p>
+
+      <div class="diagram" role="img" aria-label="Architecture Helionis : trois sites reliés à un cœur sur site protégé par pfSense et Suricata, synchronisé avec Entra ID et Microsoft 365, avec un contrôleur de domaine de secours sur Azure.">
+        <svg viewBox="0 0 720 250" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, monospace" font-size="11">
+          <g fill="var(--surface)" stroke="var(--line)" stroke-width="1.2">
+            <rect x="10" y="20" width="130" height="44" rx="6"/>
+            <rect x="10" y="102" width="130" height="44" rx="6"/>
+            <rect x="10" y="184" width="130" height="44" rx="6"/>
+            <rect x="190" y="95" width="110" height="58" rx="6"/>
+            <rect x="350" y="20" width="170" height="208" rx="8"/>
+            <rect x="570" y="20" width="140" height="94" rx="8"/>
+            <rect x="570" y="134" width="140" height="94" rx="8"/>
+          </g>
+          <g fill="none" stroke="var(--muted)" stroke-width="1.2">
+            <path d="M140 42 H165 V124 H190"/>
+            <path d="M140 124 H190"/>
+            <path d="M140 206 H165 V124"/>
+            <path d="M300 124 H350"/>
+            <path d="M520 67 H570" stroke="var(--accent)" stroke-dasharray="4 3"/>
+            <path d="M520 181 H570" stroke="var(--accent)" stroke-dasharray="4 3"/>
+          </g>
+          <g fill="var(--ink)">
+            <text x="22" y="40" font-weight="600">Lyon</text><text x="22" y="56" fill="var(--muted)">siège</text>
+            <text x="22" y="122" font-weight="600">Clermont-Fd</text><text x="22" y="138" fill="var(--muted)">usine</text>
+            <text x="22" y="204" font-weight="600">Grenoble</text><text x="22" y="220" fill="var(--muted)">R&amp;D</text>
+            <text x="202" y="118" font-weight="600">pfSense</text><text x="202" y="136" fill="var(--muted)">+ Suricata</text>
+            <text x="364" y="42" font-weight="600">Sur site · 5 serveurs</text>
+            <text x="364" y="70">AD · DNS · DHCP</text>
+            <text x="364" y="96">Serveur de fichiers</text>
+            <text x="364" y="122">Zabbix</text>
+            <text x="364" y="148">Wazuh (SIEM)</text>
+            <text x="364" y="174">GLPI (ITSM)</text>
+            <text x="364" y="208" fill="var(--muted)">VMware · WS 2022</text>
+            <text x="582" y="42" font-weight="600">Microsoft cloud</text>
+            <text x="582" y="66">Entra ID</text>
+            <text x="582" y="84">Microsoft 365</text>
+            <text x="582" y="102" fill="var(--accent)">MFA · Cond. Access</text>
+            <text x="582" y="156" font-weight="600">Azure (PRA)</text>
+            <text x="582" y="180">DC de secours</text>
+            <text x="582" y="198" fill="var(--muted)">reprise d'activité</text>
+            <text x="526" y="60" fill="var(--accent)" font-size="9">AD Connect</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="cols">
+        <div>
+          <h4>Mes contributions</h4>
+          <ul class="clean">
+            <li>Administration d'Entra ID, synchronisation des identités avec AD Connect, administration Microsoft 365</li>
+            <li>Politique d'accès : règles Conditional Access, MFA, moindre privilège</li>
+            <li>Analyse de risques EBIOS RM : matrice impact et vraisemblance, priorisation</li>
+            <li>Architecture du SI modélisée avec ArchiMate (vues métier, applicative, technologique, déploiement)</li>
+            <li>Scripts Python de contrôle de conformité et procédures d'exploitation</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Ce que j'en retiens</h4>
+          <ul class="clean">
+            <li>La sécurité des accès commence par l'identité : une politique Conditional Access bien pensée protège mieux qu'une accumulation d'outils.</li>
+            <li>Une analyse de risques n'a de valeur que si elle débouche sur des mesures priorisées et traçables dans la PSSI.</li>
+            <li>Documenter au fil de l'eau évite de perdre la maîtrise d'une infrastructure qui grandit.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tags">
+        <span class="tag">Entra ID</span><span class="tag">AD Connect</span><span class="tag">Microsoft 365</span><span class="tag">Conditional Access</span><span class="tag">MFA</span><span class="tag">EBIOS RM</span><span class="tag">ISO 27001</span><span class="tag">PSSI</span><span class="tag">ArchiMate</span><span class="tag">Python</span>
+      </div>
+    </article>
+
+    <div class="grid">
+      <article class="card">
+        <p class="meta">Automatisation · PowerShell</p>
+        <h3>Scripts d'administration Active Directory</h3>
+        <p>Trois scripts pour le cycle de vie des comptes : création depuis un CSV à l'arrivée, désactivation des comptes inactifs, inventaire des utilisateurs et des postes. Simulation avec <code>-WhatIf</code>, journalisation de chaque action, aucune suppression.</p>
+        <pre class="code"><span class="c"># onboarding en mode simulation</span>
+.\New-ADUsersFromCsv.ps1 `
+  -CsvPath .\nouveaux.csv `
+  -Domaine "helionis.local" -WhatIf</pre>
+        <div class="tags"><span class="tag">PowerShell</span><span class="tag">Active Directory</span><span class="tag">RSAT</span></div>
+      </article>
+
+      <article class="card">
+        <p class="meta">Téléphonie IP · Projet personnel</p>
+        <h3>Serveur de téléphonie Asterisk</h3>
+        <p>Mise en place d'un IPBX Asterisk avec des softphones Zoiper : comptes SIP et appels internes entre softphones. Une première version avait été testée en interne pendant mon stage chez AGM.</p>
+        <div class="tags"><span class="tag">Asterisk</span><span class="tag">SIP</span><span class="tag">Zoiper</span><span class="tag">VoIP</span></div>
+      </article>
+
+      <article class="card">
+        <p class="meta">Programmation · ESIEA</p>
+        <h3>Sokoban en Java</h3>
+        <p>Jeu de Sokoban en console réalisé dans le module PASS : grille en tableau de caractères, déplacements du joueur, poussée des caisses et détection de la victoire.</p>
+        <div class="tags"><span class="tag">Java</span><span class="tag">Algorithmique</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="parcours">
+  <div class="wrap">
+    <p class="eyebrow">Parcours</p>
+    <h2>Expériences</h2>
+    <div class="log">
+      <div class="entry">
+        <p class="when">sept. 2025 – août 2026</p>
+        <div>
+          <h3>Ingénieur DevOps (alternance)</h3>
+          <p class="org">Cerfrance Alliance Centre</p>
+          <ul>
+            <li>Maintien en conditions opérationnelles de serveurs Linux, supervision Zabbix, automatisation avec Ansible</li>
+            <li>Mise en production d'une application : Docker, pipeline Jenkins, Kubernetes (Helm, ArgoCD)</li>
+            <li>Organisation des dépôts GitLab pour tracer les changements</li>
+          </ul>
+        </div>
+      </div>
+      <div class="entry">
+        <p class="when">janv. – juin 2025</p>
+        <div>
+          <h3>Administrateur PAM &amp; Réseau (stage alterné)</h3>
+          <p class="org">NTT Sécurité, Île-de-France</p>
+          <ul>
+            <li>CyberArk : connecteurs pour une vingtaine de comptes à privilèges (SSH, RDP, Check Point)</li>
+            <li>Mise en production d'une cinquantaine d'équipements : VLAN, OSPF, VRRP, Check Point, VPN IPsec</li>
+          </ul>
+        </div>
+      </div>
+      <div class="entry">
+        <p class="when">sept. 2024 – auj.</p>
+        <div>
+          <h3>Formateur équipier</h3>
+          <p class="org">McDonald's France</p>
+          <ul><li>Formation des nouveaux collaborateurs et vulgarisation des procédures</li></ul>
+        </div>
+      </div>
+      <div class="entry">
+        <p class="when">avr. – juil. 2023</p>
+        <div>
+          <h3>Technicien Réseau et Sécurité (stage de Licence)</h3>
+          <p class="org">TIC-AFRICA, Cameroun</p>
+          <ul><li>Incidents de téléphonie IP et réseau ; switchs Cisco, Wi-Fi, OSPF, pare-feu Fortinet</li></ul>
+        </div>
+      </div>
+      <div class="entry">
+        <p class="when">avr. – juil. 2022</p>
+        <div>
+          <h3>Technicien Réseau (stage de DUT)</h3>
+          <p class="org">AGM, Cameroun</p>
+          <ul>
+            <li>Support aux utilisateurs et configuration des postes de travail</li>
+            <li>Déploiement Wi-Fi haute densité pour la CAN 2022</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h2 style="font-size:1.4rem;margin-block:2.5rem 1rem">Formation</h2>
+    <div class="log">
+      <div class="entry"><p class="when">2026 – 2029</p><div><h3>Diplôme d'ingénieur en informatique (3e année, FISA)</h3><p class="org">ESIEA</p></div></div>
+      <div class="entry"><p class="when">2024 – 2026</p><div><h3>Titre RNCP niveau 7 Cybersécurité &amp; Réseaux</h3><p class="org">IRIS Paris</p></div></div>
+      <div class="entry"><p class="when">2020 – 2023</p><div><h3>DUT et Licence Réseaux &amp; Télécoms</h3><p class="org">IUT de Bandjoun, Cameroun</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="competences">
+  <div class="wrap">
+    <p class="eyebrow">Compétences</p>
+    <h2>Outils et domaines</h2>
+    <div style="overflow-x:auto">
+      <table class="skills">
+        <tr><th scope="row">Réseaux</th><td>TCP/IP, VLAN, OSPF, VRRP, VPN IPsec, Cisco (CCNA), Check Point, Fortinet, pfSense</td></tr>
+        <tr><th scope="row">Systèmes Microsoft</th><td>Windows Server, Active Directory, DNS, DHCP, Entra ID, Microsoft 365</td></tr>
+        <tr><th scope="row">Identités et accès</th><td>CyberArk (PAM), MFA, Conditional Access, moindre privilège</td></tr>
+        <tr><th scope="row">Supervision</th><td>Wazuh (SIEM), Suricata, Zabbix, Wireshark</td></tr>
+        <tr><th scope="row">DevOps</th><td>Linux, Docker, Jenkins, Kubernetes, Helm, ArgoCD, GitLab, Ansible</td></tr>
+        <tr><th scope="row">Gouvernance</th><td>NIS 2, ISO 27001, EBIOS RM, PSSI, PRA, RGPD, ArchiMate</td></tr>
+        <tr><th scope="row">Langages</th><td>Python, Bash, PowerShell, Java</td></tr>
+        <tr><th scope="row">Langues</th><td>Français (langue maternelle), anglais C1</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="certifications">
+  <div class="wrap">
+    <p class="eyebrow">Certifications</p>
+    <h2>Validées et en cours</h2>
+    <div class="certs">
+      <div class="cert"><b>CCNA</b><span>Cisco Networking Academy</span><span class="state done">● obtenue</span></div>
+      <div class="cert"><b>MOOC SecNumacadémie</b><span>ANSSI</span><span class="state done">● obtenu</span></div>
+      <div class="cert"><b>Introduction à la cybersécurité</b><span>Cisco</span><span class="state done">● obtenue</span></div>
+      <div class="cert"><b>SC-900</b><span>Microsoft</span><span class="state wip">◐ en préparation</span></div>
+      <div class="cert"><b>CCNP ENCOR</b><span>Cisco</span><span class="state wip">◐ objectif long terme</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <p class="eyebrow">Contact</p>
+    <h2>Vous cherchez un alternant ?</h2>
+    <div class="contact" style="margin-bottom:2.5rem">
+      <span class="mail" id="mail">pegguyhomdim@gmail.com</span>
+      <button class="btn" type="button" id="copy-mail">Copier</button>
+      <span id="copied" class="meta" aria-live="polite"></span>
+    </div>
+    <footer>
+      <span>Gilles Pegguy · Créteil, Île-de-France</span>
+      <span>Mis à jour en octobre 2026</span>
+    </footer>
+  </div>
+</section>
+
+<script>
+(function () {
+  var mail = "pegguyhomdim@gmail.com";
+  var msg = document.getElementById("copied");
+  function copy() {
+    var done = function () { msg.textContent = "Adresse copiée"; setTimeout(function(){ msg.textContent = ""; }, 2500); };
+    var fallback = function () {
+      var r = document.createRange(); r.selectNodeContents(document.getElementById("mail"));
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      msg.textContent = "Adresse sélectionnée, faites Ctrl+C";
+    };
+    try {
+      navigator.clipboard.writeText(mail).then(done, fallback);
+    } catch (e) { fallback(); }
+  }
+  document.getElementById("copy-mail").addEventListener("click", copy);
+  document.getElementById("copy-mail-top").addEventListener("click", function () {
+    document.getElementById("contact").scrollIntoView();
+    copy();
+  });
+})();
+</script>
+</body>
+</html>
